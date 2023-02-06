@@ -25,6 +25,70 @@ experiments/
 ## Prerequisites
 For the project is was used the on-line Project Workspace - Jupyter Notebooks
 
-# Project results
+## Project results
 ### Dataset
 #### Dataset analysis
+Dataset has various street images which includes vehicles, pedestrians and cyclists. Images were taken in the variou weather, time condition as you can see below. (vehicles in red, pedestrians in blue, cyclist in green)
+inserire immagine del dataset
+And I randomly selected 100 images and calculated the distribution of labels like below.
+inserire immagine plot classi
+### Training
+#### Reference experiment
+Result from the reference experiment is as follow.
+
+immmagine loss
+
+As you can see, the total loss is above 2.00 and I consider it's quite bad numbers.
+AP numbers are also pretty bad like below and almost no object is detected.
+
+'forse dire che la eval non trova nessun oggetto'
+
+#### Improve on the reference
+
+##### Experiment4
+
+After several tries, I could make a breakthrough by adding some data augments options in [pipeline_new_augm.config](experiments/experiment4/pipeline_new.config) like below.
+
+```
+  data_augmentation_options {
+      random_rgb_to_gray {
+        probability: 0.3
+      }
+  }
+  data_augmentation_options {
+      random_distort_color {
+        color_ordering: 1
+      }
+  }
+  data_augmentation_options {
+      random_adjust_brightness {
+        max_delta: 0.4
+      }
+  }
+  data_augmentation_options {
+      random_adjust_contrast {
+        min_delta: 0.8
+        max_delta: 1.25
+      }
+  }
+  data_augmentation_options {
+      random_adjust_hue {
+        max_delta: 0.04
+      }
+  }
+  data_augmentation_options {
+      random_adjust_saturation {
+        min_delta: 0.8
+        max_delta: 1.25
+      }
+  }
+```
+
+Those data augment could added more samples for cloudy or night scenes and it clearly help reducing the loss.
+
+And the result loss is like below. (The pink lines indicate numbers from a new model.)
+
+![experiment4_loss](pics/experiment4_loss.png)
+
+But still AP is not enough and nothing was detected from the test datasets.
+![experiment4_ap](pics/experiment4_ap.png)
