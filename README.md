@@ -46,7 +46,7 @@ As you can see, the total loss is above 2.00 and I consider it's quite bad numbe
 
 ##### Experiment
 
-After several tries, I was able to improve the performance with a combination on the following augment options in [pipeline_new_augm.config](experiments/pipeline_new_augm.config)
+After several tries, I was able to slightly improve performances with a combination on the following augment options in [pipeline_new_augm.config](experiments/pipeline_new_augm.config)
 
 ```
   data_augmentation_options {
@@ -87,7 +87,7 @@ Those data augment could added more samples for cloudy or night scenes and it cl
 
 And the result loss is like below.
 
-pic
+![loss_after_augment](Pic/loss_after_augment.png)
 
 But still AP is not enough and nothing was detected from the test datasets.
 
