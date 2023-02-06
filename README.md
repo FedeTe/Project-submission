@@ -36,7 +36,7 @@ inserire immagine plot classi
 #### Reference experiment
 Result from the reference experiment is as follow.
 
-immmagine loss
+![before_imp](pic/loss_before_improvement.png)
 
 As you can see, the total loss is above 2.00 and I consider it's quite bad numbers.
 AP numbers are also pretty bad like below and almost no object is detected.
