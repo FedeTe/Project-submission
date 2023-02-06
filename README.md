@@ -30,17 +30,16 @@ For the project is was used the on-line Project Workspace - Jupyter Notebooks
 #### Dataset analysis
 Dataset has various street images which includes vehicles, pedestrians and cyclists. Images were taken in the variou weather, time condition as you can see below. (vehicles in red, pedestrians in blue, cyclist in green)
 ![dataset](Pic/data_vis.png)
-And I randomly selected 100 images and calculated the distribution of labels like below.
-inserire immagine plot classi
+And I randomly selected 50 images and calculated the distribution of labels like below.
+![class_distr](Pic/class_distr.png)
 ### Training
 #### Reference experiment
-Result from the reference experiment is as follow.
+The following image show the result of the training process.
 
 ![before_imp](Pic/loss_before_improvement.png)
 
-As you can see, the total loss is above 2.00 and I consider it's quite bad numbers.
-
 'forse dire che la eval non trova nessun oggetto'
+In the following experiments I'll try to improve the performance.
 
 #### Improve on the reference
 
