@@ -29,25 +29,24 @@ For the project is was used the on-line Project Workspace - Jupyter Notebooks
 ### Dataset
 #### Dataset analysis
 Dataset has various street images which includes vehicles, pedestrians and cyclists. Images were taken in the variou weather, time condition as you can see below. (vehicles in red, pedestrians in blue, cyclist in green)
-inserire immagine del dataset
+![dataset](Pic/data_vis.png)
 And I randomly selected 100 images and calculated the distribution of labels like below.
 inserire immagine plot classi
 ### Training
 #### Reference experiment
 Result from the reference experiment is as follow.
 
-![before_imp](pic/loss_before_improvement.png)
+![before_imp](Pic/loss_before_improvement.png)
 
 As you can see, the total loss is above 2.00 and I consider it's quite bad numbers.
-AP numbers are also pretty bad like below and almost no object is detected.
 
 'forse dire che la eval non trova nessun oggetto'
 
 #### Improve on the reference
 
-##### Experiment4
+##### Experiment
 
-After several tries, I could make a breakthrough by adding some data augments options in [pipeline_new_augm.config](experiments/experiment4/pipeline_new.config) like below.
+After several tries, I was able to improve the performance with a combination on the following augment options in [pipeline_new_augm.config](experiments/pipeline_new_augm.config)
 
 ```
   data_augmentation_options {
@@ -86,9 +85,10 @@ After several tries, I could make a breakthrough by adding some data augments op
 
 Those data augment could added more samples for cloudy or night scenes and it clearly help reducing the loss.
 
-And the result loss is like below. (The pink lines indicate numbers from a new model.)
+And the result loss is like below.
 
-![experiment4_loss](pics/experiment4_loss.png)
+pic
 
 But still AP is not enough and nothing was detected from the test datasets.
-![experiment4_ap](pics/experiment4_ap.png)
+
+pic
