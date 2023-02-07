@@ -1,20 +1,11 @@
 # Object Detection Project
 In this project it was created a CNN to detect and classify objects using data from Waymo dataset and a SSD Resnet 50 640x640 model. At first some exploratory data analysis has been performed on the image batch  (Exploratory Data Analysis notebook), then the model has been trained and evaluated.
 
-The projects contains all the requested files plus a "Object_Deteciotn.pdf" with the analysis on project results. N.B. there're two different .config files, the provided one and the modified one used for the various augmentation trials (it contains the last trial)
 ## Structure
-### Data
-The data is organized as follow:
-```
-/home/workspace/data/
-    - train: contain the train data
-    - val: contain the val data
-    - test - contains files to test the model and create inference videos
-```
 ### Experiments
 The experiments folder is organized as follow:
 ```
-experiments/
+Experiments/
     - Reference/ -  reference training
     - Exp_Augmentation/ - experiment on data augmentations
     - Exp_Optimization1/ - experiment on decay of learning rate
@@ -22,27 +13,31 @@ experiments/
     ...
 ```
 ## Prerequisites
-For the project is was used the on-line Project Workspace - Jupyter Notebooks
+For the project it was used the on-line Project Workspace - Jupyter Notebooks.
 
 ## Project Overview
 ### Dataset
-Dataset has various street images which includes vehicles, pedestrians and cyclists. Images were taken in the variou weather, time condition as you can see below. (vehicles in red, pedestrians in blue, cyclist in green)
+Dataset has various street images which includes vehicles, pedestrians and cyclists. Images were taken in various weather, time condition as you can see below. (vehicles in red, pedestrians in blue, cyclist in green).
+
 ![dataset](Pic/data_vis.png)
-And I randomly selected 50 images and calculated the distribution of labels like below.
+
+Here I randomly selected 50 images and calculated the distribution of labels:
+
 ![class_distr](Pic/class_distr.png)
+
+Taking this batch as a reference, most of the object in the dataset are vehicles and very few are cyclist.
+
 ## Training
 ### Reference experiment
-The following image show the result of the training process (the reference pipeline file is here [pipeline_new.config](Experiments/Reference/pipeline_new_augm.config)).
+The following image show the result of the training process (the reference pipeline file is here [pipeline_new.config](Experiments/Reference/pipeline_new.config)).
 
 ![before_imp](Pic/loss_before_improvement.png)
 
-'forse dire che la eval non trova nessun oggetto'
+Analisi dei dati
 In the following experiments I'll try to improve the performance.
 
 ## Improve on the reference
-
 ### Experiment on augmentation
-
 After several tries, I was able to slightly improve performances with a combination on the following augment options in [pipeline_new_augm.config](Experiments/Exp_Augmentation/pipeline_new_augm.config)
 
 ```
@@ -87,12 +82,13 @@ And the result loss is like below.
 ![loss_after_augment](Pic/loss_after_augment.png)
 
 Here some examples of augmented images:
+
 ![augmented_images](Pic/augmented_image.png)
 
 ### Experiment on optimization #1
 Here's the pipeline config for this experiment: [pipeline_new_opt.config](Experiments/Exp_Oprimization/pipeline_new_opt.config)
 
-At the final experiment, I have focused on reducing the loss at the later part of training and added decaying of learning rate like below.
+Here the focus was on reducing the loss at the later part of training and added decaying of learning rate like below.
 
 ```
   optimizer {
@@ -108,14 +104,14 @@ At the final experiment, I have focused on reducing the loss at the later part o
   }
 ```
 
-And it finally shows a real progress on loss and AP like below. (The orange lines indicate numbers from the new model)
+And it finally shows a real progress on loss.
 
 ![exp_opt_loss](Pic/loss_after_opt.png)
 
 ### Experiment on optimization #2
 Here's the pipeline config for this experiment: [pipeline_new_opt2.config](Experiments/Exp_Optimization2/pipeline_new_opt2.config)
 
-I've tried a different optimization to see if the result can improve.
+I've tried a different optimization to see if the result can improve compared to the exponential decay on the learning rate.
 
 ```
   optimizer {
@@ -130,7 +126,7 @@ I've tried a different optimization to see if the result can improve.
   }
 ```
 
-The total loss wasn't that improved much at the end and AP was not very good this time. (The purple lines indicate numbers from the new model)
+The total loss wasn't that improved much at the end.
 But it was quite stable at the initial and middle part of epochs.
 
 ![exp_opt2_loss](Pic/loss_after_opt2.png)
