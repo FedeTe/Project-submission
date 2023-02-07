@@ -25,15 +25,14 @@ experiments/
 ## Prerequisites
 For the project is was used the on-line Project Workspace - Jupyter Notebooks
 
-## Project results
+## Project Overview
 ### Dataset
-#### Dataset analysis
 Dataset has various street images which includes vehicles, pedestrians and cyclists. Images were taken in the variou weather, time condition as you can see below. (vehicles in red, pedestrians in blue, cyclist in green)
 ![dataset](Pic/data_vis.png)
 And I randomly selected 50 images and calculated the distribution of labels like below.
 ![class_distr](Pic/class_distr.png)
-### Training
-#### Reference experiment
+## Training
+### Reference experiment
 The following image show the result of the training process (the reference pipeline file is here [pipeline_new.config](Experiments/Reference/pipeline_new_augm.config)).
 
 ![before_imp](Pic/loss_before_improvement.png)
@@ -41,9 +40,9 @@ The following image show the result of the training process (the reference pipel
 'forse dire che la eval non trova nessun oggetto'
 In the following experiments I'll try to improve the performance.
 
-#### Improve on the reference
+## Improve on the reference
 
-##### Experiment on augmentation
+### Experiment on augmentation
 
 After several tries, I was able to slightly improve performances with a combination on the following augment options in [pipeline_new_augm.config](Experiments/Exp_Augmentation/pipeline_new_augm.config)
 
@@ -88,11 +87,10 @@ And the result loss is like below.
 
 ![loss_after_augment](Pic/loss_after_augment.png)
 
-But still AP is not enough and nothing was detected from the test datasets.
+Here some examples of augmented images:
+![augmented_images](Pic/augmented_image.png)
 
-pic
-
-##### Experiment on optimization
+### Experiment on optimization #1
 Here's the pipeline config for this experiment: [pipeline_new_opt.config](Experiments/Exp_Oprimization/pipeline_new_opt.config)
 
 At the final experiment, I have focused on reducing the loss at the later part of training and added decaying of learning rate like below.
@@ -113,10 +111,28 @@ At the final experiment, I have focused on reducing the loss at the later part o
 
 And it finally shows a real progress on loss and AP like below. (The orange lines indicate numbers from the new model)
 
-![experiment8_loss](pics/experiment8_loss.png)
+![exp_opt_loss](Pic/loss_after_opt.png)
 
-![experiment8_ap](pics/experiment8_ap.png)
+### Experiment on optimization #2
+Here's the pipeline config for this experiment: [pipeline_new_opt2.config](Experiments/Exp_Oprimization/pipeline_new_opt2.config)
 
-Here's the animated inference result from the last experiment.
+I've tried a different optimization to see if the result can improve.
 
-![animation_experiment8.gif](pics/animation_experiment8.gif)
+```
+  optimizer {
+    adam_optimizer {
+      learning_rate {
+        constant_learning_rate {
+          learning_rate: 0.001
+        }
+      }
+    }
+    use_moving_average: false
+  }
+```
+
+The total loss wasn't that improved much at the end and AP was not very good this time. (The purple lines indicate numbers from the new model)
+But it was quite stable at the initial and middle part of epochs.
+
+![exp_opt2_loss](Pic/loss_after_opt2.png)
+
