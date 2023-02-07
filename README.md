@@ -15,11 +15,10 @@ The data is organized as follow:
 The experiments folder is organized as follow:
 ```
 experiments/
-    - pretrained_model/
-    - exporter_main_v2.py - to create an inference model
-    - model_main_tf2.py - to launch training
-    - reference/ - reference training with the unchanged config file, the modified config file and all checkpoints and tfevent from the training and evaluation phase
-    - label_map.pbtxt
+    - Reference/ -  reference training
+    - Exp_Augmentation/ - experiment on data augmentations
+    - Exp_Optimization1/ - experiment on decay of learning rate
+    - Exp_Optimization2/ - experiment on constant learning rate
     ...
 ```
 ## Prerequisites
