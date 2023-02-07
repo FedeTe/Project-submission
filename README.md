@@ -33,7 +33,7 @@ The following image show the result of the training process (the reference pipel
 
 ![before_imp](Pic/loss_before_improvement.png)
 
-Analisi dei dati
+As you can see, the total loss is well above 2.00 and I consider it's quite bad numbers. 
 In the following experiments I'll try to improve the performance.
 
 ## Improve on the reference
@@ -104,14 +104,14 @@ Here the focus was on reducing the loss at the later part of training and added 
   }
 ```
 
-And it finally shows a real progress on loss.
-
 ![exp_opt_loss](Pic/loss_after_opt.png)
+
+There's a good improvement on total loss after augmentation change, and it's more stable in the initial part of the epochs (even if seems noisier compared to previous loss but the scale is different)
 
 ### Experiment on optimization #2
 Here's the pipeline config for this experiment: [pipeline_new_opt2.config](Experiments/Exp_Optimization2/pipeline_new_opt2.config)
 
-I've tried a different optimization to see if the result can improve compared to the exponential decay on the learning rate.
+I've tried a different optimization to see if the result can improve further.
 
 ```
   optimizer {
@@ -126,8 +126,7 @@ I've tried a different optimization to see if the result can improve compared to
   }
 ```
 
-The total loss wasn't that improved much at the end.
-But it was quite stable at the initial and middle part of epochs.
+Total loss slightly improved compared to ```Experiment on optimization #1```, it's lower and more stable even if there's a spyke around 1.2k step.
 
 ![exp_opt2_loss](Pic/loss_after_opt2.png)
 
