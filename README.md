@@ -34,7 +34,7 @@ And I randomly selected 50 images and calculated the distribution of labels like
 ![class_distr](Pic/class_distr.png)
 ### Training
 #### Reference experiment
-The following image show the result of the training process.
+The following image show the result of the training process (the reference pipeline file is here [pipeline_new.config](Experiments/Reference/pipeline_new_augm.config)).
 
 ![before_imp](Pic/loss_before_improvement.png)
 
@@ -43,9 +43,9 @@ In the following experiments I'll try to improve the performance.
 
 #### Improve on the reference
 
-##### Experiment
+##### Experiment on augmentation
 
-After several tries, I was able to slightly improve performances with a combination on the following augment options in [pipeline_new_augm.config](experiments/pipeline_new_augm.config)
+After several tries, I was able to slightly improve performances with a combination on the following augment options in [pipeline_new_augm.config](Experiments/Exp_Augmentation/pipeline_new_augm.config)
 
 ```
   data_augmentation_options {
@@ -91,3 +91,32 @@ And the result loss is like below.
 But still AP is not enough and nothing was detected from the test datasets.
 
 pic
+
+##### Experiment on optimization
+Here's the pipeline config for this experiment: [pipeline_new_opt.config](Experiments/Exp_Oprimization/pipeline_new_opt.config)
+
+At the final experiment, I have focused on reducing the loss at the later part of training and added decaying of learning rate like below.
+
+```
+  optimizer {
+    adam_optimizer {
+      learning_rate {
+        exponential_decay_learning_rate {
+          initial_learning_rate: 0.001
+          decay_steps: 700
+        }
+      }
+    }
+    use_moving_average: false
+  }
+```
+
+And it finally shows a real progress on loss and AP like below. (The orange lines indicate numbers from the new model)
+
+![experiment8_loss](pics/experiment8_loss.png)
+
+![experiment8_ap](pics/experiment8_ap.png)
+
+Here's the animated inference result from the last experiment.
+
+![animation_experiment8.gif](pics/animation_experiment8.gif)
