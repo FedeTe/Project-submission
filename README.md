@@ -114,7 +114,7 @@ And it finally shows a real progress on loss and AP like below. (The orange line
 ![exp_opt_loss](Pic/loss_after_opt.png)
 
 ### Experiment on optimization #2
-Here's the pipeline config for this experiment: [pipeline_new_opt2.config](Experiments/Exp_Oprimization/pipeline_new_opt2.config)
+Here's the pipeline config for this experiment: [pipeline_new_opt2.config](Experiments/Exp_Optimization2/pipeline_new_opt2.config)
 
 I've tried a different optimization to see if the result can improve.
 
